@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Reality Time Travel Library</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #008000; /* Green color */
+      text-align: center;
+      margin-top: 50px;
+    }
+    h2, h3 {
+      color: #4682B4; /* Blue color */
+      text-align: center;
+    }
+    h2 a, h3 a {
+      color: #4682B4; /* Blue color */
+      text-decoration: none;
+    }
+    h2 a:hover, h3 a:hover {
+      text-decoration: underline;
+    }
+    p {
+      color: #008000; /* Green color */
+      text-align: center;
+    }
+    a {
+      color: #4682B4; /* Blue color */
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    button {
+      background-color: #008000; /* Green color */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      display: block;
+      margin: 20px auto;
+    }
+    button:hover {
+      background-color: #006400; /* Darker green on hover */
+    }
+    /* Additional styles */
+    #login-container {
+      width: 300px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: calc(100% - 20px);
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    button[type="submit"] {
+      width: 100%;
+    }
+    .tab {
+      display: none;
+    }
+    .tab.active {
+      display: block;
+    }
+    .tabs {
+      margin-bottom: 20px;
+    }
+    .tabs button {
+      background-color: #4682B4; /* Blue color */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    .tabs button:hover {
+      background-color: #003366; /* Darker blue on hover */
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Virtual Reality Time Travel Library!</h1>
+  <div id="login-container">
+    <div class="tabs">
+      <button onclick="openTab('librarian')">Librarian Login</button>
+      <button onclick="openTab('user')">User Login</button>
+    </div>
+    <!-- Librarian Login Form -->
+    <div id="librarian" class="tab active">
+      <form id="librarianLoginForm">
+        <h2>Librarian Login</h2>
+        <label for="librarianUsername">Username:</label><br>
+        <input type="text" id="librarianUsername" name="librarianUsername" required><br>
+        <label for="librarianPassword">Password:</label><br>
+        <input type="password" id="librarianPassword" name="librarianPassword" required><br>
+        <button type="button" onclick="loginLibrarian()">Login</button>
+      </form>
+    </div>
+    <!-- User Login Form -->
+    <div id="user" class="tab">
+      <form id="userLoginForm">
+        <h2>User Login</h2>
+        <label for="userUsername">Username:</label><br>
+        <input type="text" id="userUsername" name="userUsername" required><br>
+        <label for="userPassword">Password:</label><br>
+        <input type="password" id="userPassword" name="userPassword" required><br>
+        <button type="button" onclick="loginUser()">Login</button>
+        <p>Don't have an account? <a href="#" onclick="openSignupForm()">Sign up here</a>.</p>
+      </form>
+    </div>
+    <!-- Signup Form -->
+    <div id="signup" class="tab">
+      <form id="signupForm">
+        <h2>Sign Up</h2>
+        <label for="signupUsername">Username:</label><br>
+        <input type="text" id="signupUsername" name="signupUsername" required><br>
+        <label for="signupPassword">Password:</label><br>
+        <input type="password" id="signupPassword" name="signupPassword" required><br>
+        <button type="button" onclick="signupUser()">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Function to handle user login
+    async function loginUser() {
+      const username = document.getElementById("userUsername").value;
+      const password = document.getElementById("userPassword").value;
+      try {
+        const response = await fetch('/login/user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await response.json();
+        if (data.success) {
+          alert(data.message);
+          // Redirect to user dashboard or perform other actions on success
+        } else {
+          alert(data.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    // Function to handle librarian login
+    async function loginLibrarian() {
+      const username = document.getElementById("librarianUsername").value;
+      const password = document.getElementById("librarianPassword").value;
+      try {
+        const response = await fetch('/login/librarian', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await response.json();
+        if (data.success) {
+          alert(data.message);
+          // Redirect to librarian dashboard or perform other actions on success
+        } else {
+          alert(data.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    // Function to switch between tabs
+    function openTab(tabName) {
+      const tabs = document.getElementsByClassName("tab");
+      for (let i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("active");
+      }
+      document.getElementById(tabName).classList.add
+("active");
+    }
+
+    // Function to open the signup form
+    function openSignupForm() {
+      document.getElementById("user").classList.remove("active");
+      document.getElementById("signup").classList.add("active");
+    }
+
+    // Function to handle signup
+    async function signupUser() {
+      const username = document.getElementById("signupUsername").value;
+      const password = document.getElementById("signupPassword").value;
+      try {
+        const response = await fetch('/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await response.json();
+        if (data.success) {
+          alert(data.message);
+          // Redirect to user dashboard or perform other actions on success
+        } else {
+          alert(data.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+  </script>
+</body>
+</html>

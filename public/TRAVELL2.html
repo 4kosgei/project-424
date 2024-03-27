@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library VR Time Travel</title>
+    <style>
+        /* Your existing CSS styles here */
+        /* Add any additional styles for the time travel controls */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #009688;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+        .time-travel-controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .time-travel-button {
+            background-color: #009688;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .time-travel-button:hover {
+            background-color: #00796b;
+        }
+        #historicalEvents {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        #historicalEvents li {
+            margin-bottom: 5px;
+        }
+        #historicalEvents li a {
+            color: #009688;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #historicalEvents li a:hover {
+            text-decoration: underline;
+        }
+        .random-topic {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+        .random-topic a {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Your existing HTML content here -->
+    <header>
+        <h1>Welcome to the Library VR Time Travel</h1>
+    </header>
+
+    <h2>Explore Different Eras</h2>
+    <p>Choose a year to start your time travel adventure:</p>
+    <select id="yearSelector" onchange="updateYearInput()">
+        <option value="1750" data-link="https://youtu.be/eSAbXnip8DE">1750 - Journey Through the Industrial Revolution</option>
+<option value="1050" data-link="https://youtu.be/0Cok1qfFOq4">1050- Medieval Architecture </option>
+<option value="1350" data-link="https://youtu.be/wmAv9F2Al6o">1350 - The Black Death</option>
+<option value="1550" data-link="https://youtu.be/n-uvn7ZFSUk">1550 -The Renaissance </option>
+<option value="2030" data-link="https://youtu.be/HdXCSG7qtSk">2030 - vision 2030</option>
+        <option value="1850" data-link="https://youtu.be/nllDcnfoH5A">1850 - Exploring the Victorian Era</option>
+        <option value="1950" data-link="https://youtu.be/sbsEal3Jgbg">1950 - Adventures in the Space Age</option>
+        <option value="2050" data-link="https://youtu.be/jXPj66c_dqA">2050 - Discovering the Future: Mars Colonization</option>
+    </select>
+
+    <ul id="historicalEvents"></ul>
+
+    <!-- Add the time travel controls -->
+    <div class="time-travel-controls">
+        <button class="time-travel-button" onclick="adjustDate(-1)">← Backward</button>
+        <input type="number" id="yearInput" min="1000" max="3000" value="2024">
+        <button class="time-travel-button" onclick="adjustDate(1)">Forward →</button>
+        <button class="time-travel-button" onclick="travelToYear()">Travel</button>
+    </div>
+
+    <script>
+        // Function to adjust the date
+        function adjustDate(offset) {
+            var yearInput = document.getElementById('yearInput');
+            var currentYear = parseInt(yearInput.value);
+            yearInput.value = currentYear + offset;
+            travelToYear(); // Update content when adjusting the date
+        }
+
+        // Function to update year input based on the selected year from dropdown
+        function updateYearInput() {
+            var yearSelector = document.getElementById('yearSelector');
+            var yearInput = document.getElementById('yearInput');
+            yearInput.value = yearSelector.value;
+        }
+
+        // Function to travel to the selected year
+        function travelToYear() {
+            var selectedYear = document.getElementById('yearInput').value;
+            var historicalEvents = document.getElementById('historicalEvents');
+
+            // Clear previous events
+            historicalEvents.innerHTML = '';
+
+            // Define links for specific years
+            var links = {
+1050: 'https://youtu.be/0Cok1qfFOq4',
+1350: 'https://youtu.be/wmAv9F2Al6o',
+1550: 'https://youtu.be/n-uvn7ZFSUk',
+2030: 'https://youtu.be/HdXCSG7qtSk',
+                1750: 'https://youtu.be/eSAbXnip8DE',
+                1850: 'https://youtu.be/nllDcnfoH5A',
+                1950: 'https://youtu.be/sbsEal3Jgbg',
+                2050: 'https://youtu.be/jXPj66c_dqA'
+            };
+
+            // Create link based on selected year
+            if (selectedYear in links) {
+                var link = document.createElement('a');
+                link.href = links[selectedYear];
+                link.textContent = 'Watch video about ' + selectedYear;
+                link.target = '_blank'; // Open link in a new tab
+                var listItem = document.createElement('li');
+                listItem.appendChild(link);
+                historicalEvents.appendChild(listItem);
+            } else {
+                // If year has no predefined link, display random topic
+                var randomTopics = [];
+                if (selectedYear >= 1000 && selectedYear <= 1049) {
+                    randomTopics = [
+  { topic: 'Vikings and Norse Expansion', link: 'https://en.wikipedia.org/wiki/Vikings' },
+  { topic: 'Feudalism and Medieval Society', link: 'https://en.wikipedia.org/wiki/Feudalism' },
+  { topic: 'Byzantine Empire', link: 'https://en.wikipedia.org/wiki/Byzantine_Empire' },
+  { topic: 'Islamic Golden Age', link: 'https://en.wikipedia.org/wiki/Islamic_Golden_Age' },
+  { topic: 'Medieval Warfare', link: 'https://en.wikipedia.org/wiki/Medieval_warfare' },
+  { topic: 'The Crusades', link: 'https://en.wikipedia.org/wiki/Crusades' },
+  { topic: 'Medieval Art and Architecture', link: 'https://en.wikipedia.org/wiki/Medieval_art' },
+  { topic: 'Medieval Literature', link: 'https://en.wikipedia.org/wiki/Medieval_literature' },
+  { topic: 'Medieval Trade and Commerce', link: 'https://en.wikipedia.org/wiki/Medieval_trade' },
+  { topic: 'Religious Movements and Monasticism', link: 'https://en.wikipedia.org/wiki/Monasticism' },
+  { topic: 'European Aurochs (Bos primigenius)', link: 'https://en.wikipedia.org/wiki/Aurochs' },
+  { topic: 'Caspian Tiger (Panthera tigris virgata)', link: 'https://en.wikipedia.org/wiki/Caspian_tiger' },
+  { topic: 'European Cave Lion (Panthera leo spelaea)', link: 'https://en.wikipedia.org/wiki/Cave_lion' },
+  { topic: 'Giant Ground Sloth (Megatherium spp.)', link: 'https://en.wikipedia.org/wiki/Megatherium' },
+  { topic: 'Woolly Rhinoceros (Coelodonta antiquitatis)', link: 'https://en.wikipedia.org/wiki/Woolly_rhinoceros' },
+];
+                } else if (selectedYear >= 1050 && selectedYear <= 1850) {
+                    randomTopics = [
+  { topic: 'Middle Ages', link: 'https://en.wikipedia.org/wiki/Middle_Ages' },
+  { topic: 'Medieval Castles', link: 'https://en.wikipedia.org/wiki/Medieval_castle' },
+  { topic: 'Renaissance', link: 'https://en.wikipedia.org/wiki/Renaissance' },
+  { topic: 'Age of Discovery', link: 'https://en.wikipedia.org/wiki/Age_of_Discovery' },
+  { topic: 'Protestant Reformation', link: 'https://en.wikipedia.org/wiki/Protestant_Reformation' },
+  { topic: 'Scientific Revolution', link: 'https://en.wikipedia.org/wiki/Scientific_Revolution' },
+  { topic: 'Colonialism', link: 'https://en.wikipedia.org/wiki/Colonialism' },
+  { topic: 'Imperialism', link: 'https://en.wikipedia.org/wiki/Imperialism' },
+  { topic: 'Age of Enlightenment', link: 'https://en.wikipedia.org/wiki/Age_of_Enlightenment' },
+  { topic: 'Industrial Revolution', link: 'https://en.wikipedia.org/wiki/Industrial_Revolution' },
+  { topic: 'Revolutions of 1848', link: 'https://en.wikipedia.org/wiki/Revolutions_of_1848' },
+  { topic: 'French Revolution', link: 'https://en.wikipedia.org/wiki/French_Revolution' },
+  { topic: 'American Revolution', link: 'https://en.wikipedia.org/wiki/American_Revolution' },
+ ];
+                } else if (selectedYear >= 1851 && selectedYear <= 1951) {
+                    randomTopics = [
+  { topic: 'Victorian Era', link: 'https://en.wikipedia.org/wiki/Victorian_era' },
+  { topic: 'Colonialism', link: 'https://en.wikipedia.org/wiki/Colonialism' },
+  { topic: 'Imperialism', link: 'https://en.wikipedia.org/wiki/Imperialism' },
+  { topic: 'Industrial Revolution', link: 'https://en.wikipedia.org/wiki/Industrial_Revolution' },
+  { topic: 'Urbanization', link: 'https://en.wikipedia.org/wiki/Urbanization' },
+  { topic: 'World War I', link: 'https://en.wikipedia.org/wiki/World_War_I' },
+  { topic: 'Interwar Period', link: 'https://en.wikipedia.org/wiki/Interwar_period' },
+  { topic: 'Roaring Twenties', link: 'https://en.wikipedia.org/wiki/Roaring_Twenties' },
+  { topic: 'Great Depression', link: 'https://en.wikipedia.org/wiki/Great_Depression' },
+  { topic: 'World War II', link: 'https://en.wikipedia.org/wiki/World_War_II' },
+  { topic: 'Cold War', link: 'https://en.wikipedia.org/wiki/Cold_War' },
+  { topic: 'Decolonization', link: 'https://en.wikipedia.org/wiki/Decolonization' },
+
+                    ];
+                } else if (selectedYear >= 1952 && selectedYear <= 2002) {
+                    randomTopics =[
+  { topic: 'Cold War', link: 'https://en.wikipedia.org/wiki/Cold_War' },
+  { topic: 'Space Race', link: 'https://en.wikipedia.org/wiki/Space_Race' },
+  { topic: 'Civil Rights Movement', link: 'https://en.wikipedia.org/wiki/Civil_rights_movement' },
+  { topic: 'Vietnam War', link: 'https://en.wikipedia.org/wiki/Vietnam_War' },
+  { topic: 'Counterculture and Social Movements', link: 'https://en.wikipedia.org/wiki/Counterculture_of_the_1960s' },
+  { topic: 'Space Exploration', link: 'https://en.wikipedia.org/wiki/Space_exploration' },
+  { topic: 'Post-Colonialism and Decolonization', link: 'https://en.wikipedia.org/wiki/Decolonization' },
+  { topic: 'End of Apartheid in South Africa', link: 'https://en.wikipedia.org/wiki/Apartheid' },
+  { topic: 'Fall of the Berlin Wall and Collapse of the Soviet Union', link: 'https://en.wikipedia.org/wiki/Fall_of_the_Berlin_Wall' },
+  { topic: 'Globalization', link: 'https://en.wikipedia.org/wiki/Globalization' },
+  { topic: 'Environmental Movement', link: 'https://en.wikipedia.org/wiki/Environmental_movement' },
+  { topic: 'Technological Advancements', link: 'https://en.wikipedia.org/wiki/History_of_technology#20th_century' },
+  { topic: 'Pop Culture and Entertainment', link: 'https://en.wikipedia.org/wiki/Popular_culture' },
+  { topic: 'Terrorism and Global Conflicts', link: 'https://en.wikipedia.org/wiki/Terrorism' },
+  { topic: 'Humanitarian Crises and International Aid', link: 'https://en.wikipedia.org/wiki/Category:20th-century_humanitarian_crises' }
+]; 
+} else if (selectedYear >= 2002 && selectedYear <= 2023) {
+                    randomTopics = [
+  { topic: 'War on Terror', link: 'https://en.wikipedia.org/wiki/War_on_Terror' },
+  { topic: 'Digital Revolution', link: 'https://en.wikipedia.org/wiki/Digital_Revolution' },
+  { topic: 'Arab Spring', link: 'https://en.wikipedia.org/wiki/Arab_Spring' },
+  { topic: 'Climate Change and Environmentalism', link: 'https://en.wikipedia.org/wiki/Climate_change' },
+  { topic: 'Rise of China', link: 'https://en.wikipedia.org/wiki/Rise_of_China' },
+  { topic: 'Social Justice Movements', link: 'https://en.wikipedia.org/wiki/Social_justice' },
+  { topic: 'Technological Innovations', link: 'https://en.wikipedia.org/wiki/Technological_innovation' },
+  { topic: 'Global Health Crises', link: 'https://en.wikipedia.org/wiki/Global_health' },
+  { topic: 'Pop Culture and Entertainment', link: 'https://en.wikipedia.org/wiki/Pop_culture' },
+  { topic: 'Political Polarization', link: 'https://en.wikipedia.org/wiki/Political_polarization' },
+  { topic: 'Refugee Crisis', link: 'https://en.wikipedia.org/wiki/Refugee_crisis' },
+  { topic: 'Cybersecurity and Digital Privacy', link: 'https://en.wikipedia.org/wiki/Cybersecurity' },
+  { topic: 'Space Exploration', link: 'https://en.wikipedia.org/wiki/Space_exploration' },
+  { topic: 'Social Media and Its Impact', link: 'https://en.wikipedia.org/wiki/Social_media' },
+];
+
+
+} else if (selectedYear >= 2023 && selectedYear <= 2024) {
+                    randomTopics = [
+  { topic: 'COVID-19 pandemic', link: 'https://en.wikipedia.org/wiki/COVID-19_pandemic' },
+  { topic: 'Climate change mitigation', link: 'https://en.wikipedia.org/wiki/Climate_change_mitigation' },
+  { topic: 'Environmental policy', link: 'https://en.wikipedia.org/wiki/Environmental_policy' },
+  { topic: 'Technological advancements', link: 'https://en.wikipedia.org/wiki/Technological_advancements' },
+  { topic: 'Artificial intelligence', link: 'https://en.wikipedia.org/wiki/Artificial_intelligence' },
+  { topic: 'Geopolitics', link: 'https://en.wikipedia.org/wiki/Geopolitics' },
+  { topic: 'Diplomacy', link: 'https://en.wikipedia.org/wiki/Diplomacy' },
+];
+
+} else if (selectedYear >= 2025 && selectedYear <= 2049) {
+                    randomTopics = [
+  { topic: 'Quantum computing', link: 'https://en.wikipedia.org/wiki/Quantum_computing' },
+  { topic: 'Augmented reality', link: 'https://en.wikipedia.org/wiki/Augmented_reality' },
+  { topic: 'Ocean exploration', link: 'https://en.wikipedia.org/wiki/Ocean_exploration' },
+  { topic: 'Synthetic biology', link: 'https://en.wikipedia.org/wiki/Synthetic_biology' },
+  { topic: 'Regenerative medicine', link: 'https://en.wikipedia.org/wiki/Regenerative_medicine' },
+  { topic: 'Universal basic income', link: 'https://en.wikipedia.org/wiki/Universal_basic_income' },
+  { topic: 'Hyperloop', link: 'https://en.wikipedia.org/wiki/Hyperloop' },
+  { topic: 'CRISPR', link: 'https://en.wikipedia.org/wiki/CRISPR' },
+  { topic: 'Neuroscience', link: 'https://en.wikipedia.org/wiki/Neuroscience' },
+  { topic: 'Cultured meat', link: 'https://en.wikipedia.org/wiki/Cultured_meat' },
+  { topic: 'Water scarcity', link: 'https://en.wikipedia.org/wiki/Water_scarcity' },
+  { topic: 'Quantum internet', link: 'https://en.wikipedia.org/wiki/Quantum_internet' },
+  { topic: 'Cultural revival', link: 'https://en.wikipedia.org/wiki/Cultural_revival' },
+  { topic: 'Universal healthcare', link: 'https://en.wikipedia.org/wiki/Universal_health_care' },
+  { topic: 'Space tourism', link: 'https://en.wikipedia.org/wiki/Space_tourism' }
+];
+
+
+} else if (selectedYear >= 2050 && selectedYear <= 2080) {
+                    randomTopics = [
+  { topic: 'Interstellar travel', link: 'https://en.wikipedia.org/wiki/Interstellar_travel' },
+  { topic: 'Climate change mitigation', link: 'https://en.wikipedia.org/wiki/Climate_change_mitigation' },
+  { topic: 'Biotechnology', link: 'https://en.wikipedia.org/wiki/Biotechnology' },
+  { topic: 'Artificial general intelligence', link: 'https://en.wikipedia.org/wiki/Artificial_general_intelligence' },
+  { topic: 'Asteroid mining', link: 'https://en.wikipedia.org/wiki/Asteroid_mining' },
+  { topic: 'Political philosophy', link: 'https://en.wikipedia.org/wiki/Political_philosophy' },
+  { topic: 'Neuromorphic engineering', link: 'https://en.wikipedia.org/wiki/Neuromorphic_engineering' },
+  { topic: 'Human–computer interaction', link: 'https://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction' },
+  { topic: 'Quantum cryptography', link: 'https://en.wikipedia.org/wiki/Quantum_cryptography' },
+  { topic: 'Ethics of artificial intelligence', link: 'https://en.wikipedia.org/wiki/Ethics_of_artificial_intelligence' },
+  { topic: 'Renewable energy', link: 'https://en.wikipedia.org/wiki/Renewable_energy' },
+  { topic: 'Aerospace engineering', link: 'https://en.wikipedia.org/wiki/Aerospace_engineering' },
+  { topic: 'Cultural evolution', link: 'https://en.wikipedia.org/wiki/Cultural_evolution' },
+  { topic: 'Regenerative medicine', link: 'https://en.wikipedia.org/wiki/Regenerative_medicine' },
+  { topic: 'Automation', link: 'https://en.wikipedia.org/wiki/Automation' }
+];
+
+
+} else if (selectedYear >= 2080&& selectedYear <= 3000) {
+                    randomTopics = [
+  { topic: 'Intergalactic travel', link: 'https://en.wikipedia.org/wiki/Intergalactic_travel' },
+  { topic: 'Galactic federation', link: 'https://en.wikipedia.org/wiki/Galactic_federation' },
+  { topic: 'Artificial consciousness', link: 'https://en.wikipedia.org/wiki/Artificial_consciousness' },
+  { topic: 'Posthumanism', link: 'https://en.wikipedia.org/wiki/Posthumanism' },
+  { topic: 'Quantum mechanics', link: 'https://en.wikipedia.org/wiki/Quantum_mechanics' },
+  { topic: 'Multiverse', link: 'https://en.wikipedia.org/wiki/Multiverse' },
+  { topic: 'Transcendence (philosophy)', link: 'https://en.wikipedia.org/wiki/Transcendence_(philosophy)' },
+  { topic: 'Ascended master', link: 'https://en.wikipedia.org/wiki/Ascended_master' },
+  { topic: 'Megastructure', link: 'https://en.wikipedia.org/wiki/Megastructure' },
+  { topic: 'Astroengineering', link: 'https://en.wikipedia.org/wiki/Astroengineering' },
+];
+}
+
+
+                var randomTopic = randomTopics[Math.floor(Math.random() * randomTopics.length)];
+
+                var link = document.createElement('a');
+                link.href = randomTopic.link;
+                link.textContent = 'Read about ' + randomTopic.topic + ' on Wikipedia';
+                link.target = '_blank'; // Open link in a new tab
+
+                var listItem = document.createElement('li');
+                listItem.className = 'random-topic';
+                listItem.appendChild(link);
+                historicalEvents.appendChild(listItem);
+            }
+        }
+    </script>
+</body>
+</html>
+ 

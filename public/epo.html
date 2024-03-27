@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Reality Time Travel Library</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    /* CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #008000; /* Green color */
+      text-align: center;
+      margin-top: 50px;
+    }
+    h2, h3 {
+      color: #4682B4; /* Blue color */
+      text-align: center;
+    }
+    h2 a, h3 a {
+      color: #4682B4; /* Blue color */
+      text-decoration: none;
+    }
+    h2 a:hover, h3 a:hover {
+      text-decoration: underline;
+    }
+    p {
+      color: #008000; /* Green color */
+      text-align: center;
+    }
+    a {
+      color: #4682B4; /* Blue color */
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    button {
+      background-color: #008000; /* Green color */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      display: block;
+      margin: 20px auto;
+    }
+    button:hover {
+      background-color: #006400; /* Darker green on hover */
+    }
+    /* Additional styles */
+    #vr-container {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      perspective: 2000px; /* Adjusted perspective */
+    }
+    #vr-content {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transform-style: preserve-3d;
+    }
+    .vr-scene {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden;
+      transition: transform 1s;
+      display: none;
+    }
+    .vr-scene.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <h1>Welcome to the Virtual Reality Time Travel Library!</h1>
+
+  <!-- Navigation -->
+  <nav>
+    <button onclick="travelTo('ancient-rome')">Ancient Rome</button>
+    <button onclick="travelTo('industrial-revolution')">Industrial Revolution</button>
+    <button onclick="travelTo('future')">Future</button>
+  </nav>
+
+  <!-- VR Container -->
+  <div id="vr-container">
+    <div id="vr-content">
+      <!-- Scene: Ancient Rome -->
+      <div id="ancient-rome" class="vr-scene">
+        <h2><a href="https://en.wikipedia.org/wiki/Ancient_Rome">Welcome to Ancient Rome</a></h2>
+        <p>Experience the grandeur of the Roman Empire</p>
+        <div id="ancient-rome-books">
+          <h3>Featured Books</h3>
+          <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Aeneid">The Aeneid by Virgil</a></li>
+            <li><a href="https://www.history.com/topics/ancient-rome/marcus-aurelius">Meditations by Marcus Aurelius</a></li>
+            <li><a href="https://en.wikisource.org/wiki/The_Lives_of_the_Twelve_Caesars/Nero">The Twelve Caesars by Suetonius</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Scene: Industrial Revolution -->
+      <div id="industrial-revolution" class="vr-scene">
+        <h2><a href="https://en.wikipedia.org/wiki/Industrial_Revolution">Industrial Revolution</a></h2>
+        <p>Witness the birth of modern industry</p>
+        <div id="industrial-revolution-books">
+          <h3>Featured Books</h3>
+          <ul>
+            <li><a href="https://www.reference.com/world-view/adam-smith-important">The Wealth of Nations by Adam Smith</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Frankenstein_in_popular_culture">Frankenstein by Mary Shelley</a></li>
+            <li><a href="https://www.reference.com/world-view/did-charles-dickens">Hard Times by Charles Dickens</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Scene: Future -->
+      <div id="future" class="vr-scene">
+        <h2><a href="https://en.wikipedia.org/wiki/Future">Future</a></h2>
+        <p>Explore the possibilities of tomorrow</p>
+        <div id="future-books">
+          <h3>Featured Books</h3>
+          <ul>
+            <li><a href="https://www.theguardian.com/books/2014/jul/28/william-gibson-neuromancer-cyberpunk-books">Neuromancer by William Gibson</a></li>
+            <li><a href="https://www.ask.com/tv-movies/handmaids-tale">The Handmaid's Tale by Margaret Atwood</a></li>
+            <li><a href="https://commons.wikimedia.org/wiki/Category:Works_by_Isaac_Asimov">Foundation by Isaac Asimov</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function travelTo(scene) {
+      const scenes = document.querySelectorAll('.vr-scene');
+      scenes.forEach(s => {
+        if (s.id === scene) {
+          s.classList.add('active');
+        } else {
+          s.classList.remove('active');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
